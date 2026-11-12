@@ -138,12 +138,29 @@
   .punto h3{font-size:21px;margin-bottom:8px}
   .punto p{color:var(--chiaro-su-verde);font-size:16px}
 
-  .contatti{text-align:center}
-  .contatti .intro{margin:0 auto 30px}
   .scheda-contatto{display:inline-block;text-align:left;background:#fff;border:1px solid var(--linea);border-radius:16px;padding:26px 34px;min-width:min(460px,100%)}
   .scheda-contatto div{color:var(--grigio)}
   .scheda-contatto b{color:var(--testo);display:inline-block;min-width:96px}
 
+
+  .contatti{text-align:left}
+  .contatti-griglia{display:grid;grid-template-columns:.85fr 1.15fr;gap:56px;align-items:start}
+  .contatti-testo .intro{margin:0 0 26px}
+  .modulo{background:#fff;border:1px solid var(--linea);border-radius:18px;padding:30px;display:grid;gap:16px}
+  .modulo .riga2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .modulo label{display:grid;gap:6px;font-size:14px;font-weight:600;color:var(--testo)}
+  .modulo input,.modulo select,.modulo textarea{font:inherit;font-size:16px;font-weight:400;padding:12px 14px;border:1px solid var(--linea);border-radius:10px;background:var(--bianco);color:var(--testo);width:100%}
+  .modulo input:focus,.modulo select:focus,.modulo textarea:focus{outline:2px solid var(--oro);outline-offset:1px;border-color:var(--oro)}
+  .modulo .consenso{display:flex;gap:10px;align-items:flex-start;font-weight:400;color:var(--grigio)}
+  .modulo .consenso input{width:20px;height:20px;margin-top:2px;flex:none}
+  .modulo .tasto{justify-self:start;min-height:48px}
+  .modulo .tasto[disabled]{opacity:.6;cursor:wait}
+  .nascosto{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+  .esito{font-size:15px;min-height:1px}
+  .esito.ok{color:var(--verde);font-weight:600}
+  .esito.errore{color:#a3361f;font-weight:600}
+  @media (max-width:980px){.contatti-griglia{grid-template-columns:1fr;gap:30px}}
+  @media (max-width:560px){.modulo .riga2{grid-template-columns:1fr}.modulo{padding:22px}}
   footer{background:var(--verde-3);color:#b9cbc2;padding:40px 0;font-size:14px}
   footer .box{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
   footer .marchio{font-size:18px}
@@ -403,13 +420,38 @@
 </section>
 
 <section class="contatti" id="contatti">
-  <div class="box">
-    <div class="sopra">Contatti</div>
-    <h2>Parliamone</h2>
-    <p class="intro">Per informazioni, collaborazioni o per diventare concessionario, scrivici.</p>
-    <div class="scheda-contatto">
-      <div><b>Sito</b>prismacore.online</div>
+  <div class="box contatti-griglia">
+    <div class="contatti-testo">
+      <div class="sopra">Contatti</div>
+      <h2>Parliamone</h2>
+      <p class="intro">Per informazioni, una demo, collaborazioni o per diventare concessionario, scrivici: ti rispondiamo il prima possibile.</p>
+      <div class="scheda-contatto">
+        <div><b>Sito</b>prismacore.online</div>
+      </div>
     </div>
+    <form class="modulo" id="modulo" novalidate>
+      <div class="riga2">
+        <label>Nome e cognome *<input name="nome" required autocomplete="name"></label>
+        <label>Ristorante o azienda<input name="azienda" autocomplete="organization"></label>
+      </div>
+      <div class="riga2">
+        <label>Email *<input name="email" type="email" required autocomplete="email"></label>
+        <label>Telefono<input name="telefono" type="tel" autocomplete="tel"></label>
+      </div>
+      <label>Motivo
+        <select name="motivo">
+          <option>Informazioni</option>
+          <option>Richiesta di una demo</option>
+          <option>Diventare concessionario</option>
+          <option>Altro</option>
+        </select>
+      </label>
+      <label>Messaggio *<textarea name="messaggio" rows="5" required></textarea></label>
+      <input type="text" name="_honey" class="nascosto" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <label class="consenso"><input type="checkbox" name="consenso" required> Acconsento all'uso dei miei dati solo per ricevere una risposta a questa richiesta. *</label>
+      <button class="tasto" type="submit">Invia la richiesta</button>
+      <div class="esito" id="esito" role="status" aria-live="polite"></div>
+    </form>
   </div>
 </section>
 
@@ -438,6 +480,28 @@
   function riparti(){clearInterval(timer);timer=setInterval(function(){vai((i+1)%schede.length);},5200);}
   punti.children[0].classList.add('attiva');riparti();
 
+
+  var f=document.getElementById('modulo'), es=document.getElementById('esito');
+  f.addEventListener('submit',function(ev){
+    ev.preventDefault(); es.className='esito'; es.textContent='';
+    var d=new FormData(f);
+    if(d.get('_honey')) return;
+    var mancano=[];
+    if(!String(d.get('nome')||'').trim()) mancano.push('nome e cognome');
+    var em=String(d.get('email')||'').trim();
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)) mancano.push('un\'email valida');
+    if(!String(d.get('messaggio')||'').trim()) mancano.push('il messaggio');
+    if(!d.get('consenso')) mancano.push('il consenso');
+    if(mancano.length){ es.className='esito errore'; es.textContent='Manca: '+mancano.join(', ')+'.'; return; }
+    var b=f.querySelector('button'); b.disabled=true; b.textContent='Invio in corso...';
+    var dati={ _subject:'Richiesta dal sito PrismaCore: '+d.get('motivo'), _template:'table', _captcha:'false',
+      Nome:d.get('nome'), Azienda:d.get('azienda'), email:em, Telefono:d.get('telefono'), Motivo:d.get('motivo'), Messaggio:d.get('messaggio') };
+    fetch('https://formsubmit.co/ajax/tognonisimone003@gmail.com',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(dati)})
+      .then(function(r){return r.json().then(function(j){ if(!r.ok||String(j.success)!=='true') throw new Error(j.message||'errore'); });})
+      .then(function(){ f.reset(); es.className='esito ok'; es.textContent='Grazie, richiesta inviata. Ti rispondiamo il prima possibile.'; })
+      .catch(function(){ es.className='esito errore'; es.textContent='Non siamo riusciti a inviare la richiesta. Riprova tra qualche minuto.'; })
+      .then(function(){ b.disabled=false; b.textContent='Invia la richiesta'; });
+  });
   var el=[].slice.call(document.querySelectorAll('.appare'));
   if('IntersectionObserver' in window){
     var io=new IntersectionObserver(function(v){v.forEach(function(e){if(e.isIntersecting){e.target.classList.add('vista');io.unobserve(e.target);}});},{threshold:.12});
