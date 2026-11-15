@@ -131,6 +131,27 @@
   .strato.ai{background:linear-gradient(135deg,rgba(200,162,60,.25),rgba(200,162,60,.05));border-color:var(--oro)}
   .freccia{text-align:center;color:var(--oro);font-size:18px;line-height:1;margin:8px 0}
 
+  /* Sistema unico */
+  .unico{background:var(--verde-chiaro)}
+  .unico h2 em{color:var(--oro);font-style:italic}
+  .moduli-unico{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:40px}
+  .moduli-unico div{background:#fff;border:1px solid var(--linea);border-radius:14px;padding:18px 20px}
+  .moduli-unico b{display:block;color:var(--verde);font-size:16px;margin-bottom:4px}
+  .moduli-unico span{color:var(--grigio);font-size:14.5px}
+  .moduli-unico .piu{background:var(--verde);border-color:var(--verde)}
+  .moduli-unico .piu b{color:var(--oro-chiaro)}
+  .moduli-unico .piu span{color:var(--chiaro-su-verde)}
+  .confronto{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:28px}
+  .confronto>div{border-radius:16px;padding:26px 28px}
+  .confronto .etich{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px}
+  .confronto .prima{background:#fff;border:1px dashed var(--linea)}
+  .confronto .prima .etich{color:var(--grigio)}
+  .confronto .prima p{color:var(--grigio);font-size:16.5px}
+  .confronto .dopo{background:var(--verde);color:#fff}
+  .confronto .dopo .etich{color:var(--oro)}
+  .confronto .dopo p{color:#fff;font-size:16.5px}
+  @media (max-width:900px){.moduli-unico{grid-template-columns:1fr 1fr}.confronto{grid-template-columns:1fr}}
+  @media (max-width:480px){.moduli-unico{grid-template-columns:1fr}}
   /* Slogan */
   .slogan{background:var(--bianco);border-top:1px solid var(--linea);text-align:center;padding:90px 0}
   .slogan .grande{font-family:Fraunces,serif;font-size:clamp(28px,3.8vw,44px);line-height:1.3;max-width:980px;margin:0 auto;font-weight:500}
@@ -407,6 +428,28 @@
       <div class="strato"><b>Server del locale</b><span>Il servizio va avanti anche senza internet</span></div>
       <div class="freccia">&#8597;</div>
       <div class="strato"><b>Cassa · Palmari · Cucina · Kiosk</b><span>Ogni schermo come un'app, a tutto schermo</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="unico" id="unico">
+  <div class="box">
+    <div class="sopra appare">Tutto in un unico sistema</div>
+    <h2 class="appare">Un solo software. Un solo <em>interlocutore</em>.</h2>
+    <p class="intro appare">Gestione del ristorante, prenotazioni, controllo di gestione, controllo dei costi e tutti i moduli aggiuntivi lavorano sugli stessi dati, nello stesso sistema. Quando il locale cresce accendi un modulo in più: non cambi software, non rifai le configurazioni, non ricominci da capo.</p>
+    <div class="moduli-unico appare">
+      <div><b>Gestione del ristorante</b><span>Cassa, sala, palmari, cucina</span></div>
+      <div><b>Prenotazioni</b><span>Tavoli, turni, conferme ai clienti</span></div>
+      <div><b>Controllo di gestione</b><span>Report e andamento del locale</span></div>
+      <div><b>Controllo dei costi</b><span>Food cost, margini, personale</span></div>
+      <div><b>Magazzino e acquisti</b><span>Carichi, fornitori, inventari</span></div>
+      <div><b>Clienti e marketing</b><span>Fidelity, campagne, messaggi</span></div>
+      <div><b>Catene</b><span>Più locali, una sola regia</span></div>
+      <div class="piu"><b>Moduli aggiuntivi</b><span>Si accendono quando servono</span></div>
+    </div>
+    <div class="confronto appare">
+      <div class="prima"><div class="etich">Di solito</div><p>Un programma per la cassa, uno per le prenotazioni, uno per il magazzino, un foglio di calcolo per i costi. E dieci interlocutori diversi da chiamare quando qualcosa non va.</p></div>
+      <div class="dopo"><div class="etich">Con PrismaCore</div><p>Un unico sistema, un unico accesso, un unico punto di riferimento. Dal primo giorno e per tutta la crescita del locale, senza mai cambiare software.</p></div>
     </div>
   </div>
 </section>
