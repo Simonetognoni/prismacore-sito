@@ -131,6 +131,21 @@
   .strato.ai{background:linear-gradient(135deg,rgba(200,162,60,.25),rgba(200,162,60,.05));border-color:var(--oro)}
   .freccia{text-align:center;color:var(--oro);font-size:18px;line-height:1;margin:8px 0}
 
+  /* Come nasce */
+  .nascita-griglia{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+  .nascita h2 em{color:var(--oro);font-style:italic}
+  .nascita .intro+.intro{margin-top:16px}
+  .formula{display:grid;gap:6px}
+  .formula .voce{display:flex;gap:18px;align-items:center;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.10);border-radius:16px;padding:16px 20px}
+  .formula .grosso{font-family:Fraunces,serif;font-size:34px;color:var(--oro);min-width:74px;text-align:center;line-height:1}
+  .formula .grosso.parola{font-size:21px}
+  .formula .grosso.ai{font-family:Inter,sans-serif;font-weight:800;letter-spacing:.04em}
+  .formula b{display:block;color:#fff;font-size:16px;margin-bottom:2px}
+  .formula span{color:var(--chiaro-su-verde);font-size:14.5px}
+  .formula .segno{text-align:center;color:var(--oro);font-size:20px;line-height:1}
+  .formula .risultato{background:linear-gradient(135deg,rgba(200,162,60,.28),rgba(200,162,60,.06));border-color:var(--oro);justify-content:center;text-align:center}
+  .formula .risultato b{font-family:Fraunces,serif;font-size:24px;color:var(--oro-chiaro)}
+  @media (max-width:900px){.nascita-griglia{grid-template-columns:1fr;gap:36px}}
   /* Sistema unico */
   .unico{background:var(--verde-chiaro)}
   .unico h2 em{color:var(--oro);font-style:italic}
@@ -428,6 +443,26 @@
       <div class="strato"><b>Server del locale</b><span>Il servizio va avanti anche senza internet</span></div>
       <div class="freccia">&#8597;</div>
       <div class="strato"><b>Cassa · Palmari · Cucina · Kiosk</b><span>Ogni schermo come un'app, a tutto schermo</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="scuro nascita" id="come-nasce">
+  <div class="box nascita-griglia">
+    <div>
+      <div class="sopra appare">Come nasce PrismaCore</div>
+      <h2 class="appare">Trent'anni di ristorazione, scritti con l'<em>intelligenza artificiale</em></h2>
+      <p class="intro appare">PrismaCore è un ecosistema software scritto interamente con l'apporto dell'intelligenza artificiale. Ma l'AI da sola non sa com'è una sala piena il sabato sera: dietro ogni funzione ci sono il racconto e l'esperienza di decine di tecnici e consulenti che da oltre 30 anni vivono il mondo della ristorazione e dell'hospitality.</p>
+      <p class="intro appare">Il risultato unisce il meglio dei due mondi: un codice potentissimo, che cresce in fretta, e la concretezza di chi i locali li conosce dall'interno.</p>
+    </div>
+    <div class="formula appare">
+      <div class="voce"><div class="grosso">30+</div><div><b>Anni sul campo</b><span>Ristorazione e hospitality, dalla trattoria alla catena</span></div></div>
+      <div class="segno">+</div>
+      <div class="voce"><div class="grosso parola">Decine</div><div><b>Di tecnici e consulenti</b><span>Che hanno raccontato il lavoro vero dei locali</span></div></div>
+      <div class="segno">+</div>
+      <div class="voce"><div class="grosso ai">AI</div><div><b>Codice scritto con l'intelligenza artificiale</b><span>Potente, moderno, in continua evoluzione</span></div></div>
+      <div class="segno uguale">=</div>
+      <div class="voce risultato"><div><b>PrismaCore</b><span>Un ecosistema nato dall'esperienza, costruito con l'AI</span></div></div>
     </div>
   </div>
 </section>
